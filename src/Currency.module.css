@@ -1,0 +1,30 @@
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 65px;
+    height: 80px;
+    background-color: #E0E0E0;
+    color: black;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    position: relative;
+    top: -2400px;
+    left: 290px;
+    text-align: right;
+    padding-right: 10px;
+    z-index: 3;
+}
+.wrapper span {
+    display: flex;
+    align-items: center;
+    padding: 0px 8px;
+    gap: 5px;
+}
+.wrapper span p {
+    width: 20px;
+    height: 20px;
+}

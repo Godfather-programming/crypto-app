@@ -15,7 +15,9 @@ function Form({children}) {
         </tr>
     </thead>
 
+<tbody> 
     {children}
+</tbody>
     </table>
   )
 }
