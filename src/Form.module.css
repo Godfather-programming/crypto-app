@@ -1,0 +1,12 @@
+table {
+  margin-top: 70px;  
+  width: 100%;
+  border-bottom: 2px solid #fff;
+  /* flex-grow: 1;
+  flex-basis: 0; */
+  text-align: left;
+}
+
+.hidden {
+    display: none;
+}

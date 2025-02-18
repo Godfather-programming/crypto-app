@@ -1,0 +1,29 @@
+.layout {
+    color: #fff;
+    background-color: #2979FF;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+
+}
+.info {
+    font-weight: bold;
+}
+.mainText {
+    color: #131315;
+}
+.footerWrapper {
+    margin-top: 50px;
+    text-align: center;
+    height: 65px;
+    line-height: 65px;
+}
