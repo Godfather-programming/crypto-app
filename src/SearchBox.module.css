@@ -1,4 +1,5 @@
 .container {
     background-color: #fff;
     color: black;
+    width: fit-content;
 }
