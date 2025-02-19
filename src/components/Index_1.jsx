@@ -18,7 +18,7 @@ function Index_1({ page, currency, }) {
     setDatas([])
     fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`).then(res => res.json()).then(json => setDatas(json)).catch(err => console.log(err)) 
   }, [page, currency])
-  console.log(datas)
+  // console.log(datas)
   //   const {image, symbol, name, current_price, price_change_percentage_24h, total_volume} = data
 
   return (

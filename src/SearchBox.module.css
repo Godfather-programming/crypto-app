@@ -1,5 +1,15 @@
 .container {
     background-color: #fff;
     color: black;
-    width: fit-content;
+}
+.info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid green;
+}
+.container img {
+    width: 20px;
+    height: 20px;
 }
