@@ -3,7 +3,7 @@ import styles from "./SearchBox.module.css"
 
 function SearchBox({amount}) {
     const [datas, setDatas] = useState([])
-    // const [modernDatas, setModernDatas] = useState([])
+    const [modernDatas, setModernDatas] = useState([])
     useEffect (() =>  {
       setDatas([])
       const fetchDatas = async () => {
