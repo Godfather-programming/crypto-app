@@ -10,7 +10,6 @@ function App() {
   const [page, setPage] = useState(1)
   const [currency, setCurrency] = useState("usd")
   const [show, setShow] = useState(false)
-
   const previousHandler = () => {
     if (page <= 1) return
     setPage(page => page - 1)

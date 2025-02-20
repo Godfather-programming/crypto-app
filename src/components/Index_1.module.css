@@ -1,12 +1,13 @@
 .coin {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 
 .info {
 display: flex;
 align-items: center;
-gap: 5px;
+gap: 10px;
+font-size: 1.2rem;
 text-transform: uppercase;
 }
 .space {

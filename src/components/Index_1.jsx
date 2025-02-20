@@ -6,14 +6,16 @@ import chartUp from "../assets/chart-up.svg"
 
 import styles from "./Index_1.module.css"
 import { ImGift } from "react-icons/im";
+import Modal from "./Modal"
 
 
 
 
-function Index_1({ page, currency, }) {
+function Index_1({ page, currency }) {
   // console.log(currency)
   // console.log(page)
   const [datas, setDatas] = useState([])
+  const [presence, setPresence ] = useState(false)
   useEffect (() => {
     setDatas([])
     fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`).then(res => res.json()).then(json => setDatas(json)).catch(err => console.log(err)) 
@@ -24,7 +26,7 @@ function Index_1({ page, currency, }) {
   return (
    <>
 
-  
+<Modal presence={presence} setPresence={setPresence} name={datas.map(data => data.name.toLowerCase())}/>
    
 
 
@@ -51,16 +53,23 @@ function Index_1({ page, currency, }) {
        
   </div>
 } 
+
+
+
 {datas.map((data) => (
+  <>
+  
       <tr key={data.id} className={styles.space}>
-      <td className={styles.info}> <img className={styles.coin} src={data.image} alt="" /> {data.symbol} </td>
+      <td className={styles.info}> <img className={styles.coin} src={data.image} alt="" /> <span onClick={() => setPresence(modal => !modal)}> {data.symbol} </span> </td>
       <td> {data.name} </td>
       <td> ${data.current_price} </td>
       <td style={{color : data.price_change_percentage_24h > 0 ? "#00E676" : "#FF1744"}}> {data.price_change_percentage_24h}% </td>
       <td> $ {data.total_volume} </td>
       <td > <img src={data.price_change_percentage_24h > 0 ? chartUp : chartDown} alt="" /> </td>
     </tr>
+    </>
     ))}
+
 
 
   </>
