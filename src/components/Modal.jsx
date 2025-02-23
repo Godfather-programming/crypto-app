@@ -1,27 +1,31 @@
 import { useEffect, useState } from "react"
 import styles from "./Modal.module.css"
+import js from "@eslint/js"
 
 function Modal({presence, setPresence, name}) {
     console.log(name)
     // const [modal, setModal] = useState(true)
-    const [data, setData] = useState()
+    const [data, setData] = useState([])
     const searchHandler = (information) =>  `https://api.coingecko.com/api/v3/coins/${information}/market_chart?vs_currency=usd&days&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`
 
 useEffect(() => {
     const fetchData = async () => {
     try {
     const res = await fetch(searchHandler(name))
-    const json = await res.json() 
+    const json = await res.json()
+    console.log(json) 
     setData(json)
+    console.log(data)
     } catch (error) {
     console.log(error)        
     }
     }
+  fetchData()
+}, [name])
 
-}, [])
 
-
-    const clickHandler = () => {
+    const clickHandler = (e) => {
+      console.log(e.target)
       setPresence(presence => !presence)
     }
   return (

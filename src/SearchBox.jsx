@@ -8,6 +8,10 @@ function SearchBox({amount, represent}) {
 
     useEffect (() =>  {
       // const controller = new AbortController()
+      // const perform = searchHandler()
+      // if(perform) {
+      //   setDatas([])
+      // }
       setDatas([])
       if(!amount) return
       const fetchDatas = async () => {
@@ -29,14 +33,45 @@ return () => {
     // const newDatas = datas.filter(data => data.name.toLowerCase().includes(amount))
     // setDatas(newDatas)
     // console.log(datas)
-    const {coins} = datas
-    console.log(coins) 
+    // const {coins} = datas
+    // console.log(coins) 
+
     return (
+<> 
+
+
+
       <div className={styles.container} style={{display : represent ? "block" : "none" }}>
+
+      {!datas.length && 
+     <div>
+     <div className={styles.s1}>
+           <div className={`${styles.s} ${styles.sb} ${styles.sb1} `}></div>
+           <div className={`${styles.s} ${styles.sb} ${styles.sb2} `}></div>
+           <div className={`${styles.s} ${styles.sb} ${styles.sb3} `}></div>
+           <div className={`${styles.s} ${styles.sb} ${styles.sb4} `}></div>
+         </div>
+     
+     
+         <div className={styles.s2}>
+           <div className={`${styles.s} ${styles.sb} ${styles.sb5} `}></div>
+           <div className={`${styles.s} ${styles.sb} ${styles.sb6} `}></div>
+           <div className={`${styles.s} ${styles.sb} ${styles.sb7} `}></div>
+           <div className={`${styles.s} ${styles.sb} ${styles.sb8} `}></div>
+         </div>
+     
+         <div class={styles.bigcon}>
+           <div class={`${styles.big} ${styles.b}`}></div>
+         </div>
+            
+       </div> 
+     } 
+
 {datas.map(data => (
   <p className={styles.info}> <img src={data.large} alt="" /> {data.name} </p>
 ) )}
     </div>
+    </>
   )
 }
 
