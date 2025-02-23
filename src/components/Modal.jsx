@@ -2,20 +2,21 @@ import { useEffect, useState } from "react"
 import styles from "./Modal.module.css"
 import js from "@eslint/js"
 
-function Modal({presence, setPresence, name}) {
+function Modal({presence, setPresence, name, data, nouny, image}) {
+  // console.log(data)
     console.log(name)
     // const [modal, setModal] = useState(true)
-    const [data, setData] = useState([])
-    const searchHandler = (information) =>  `https://api.coingecko.com/api/v3/coins/${information}/market_chart?vs_currency=usd&days&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`
+    const [information, setData] = useState([])
+    const searchHandler = (information) =>  `https://api.coingecko.com/api/v3/coins/${information}/market_chart?vs_currency=usd&days=7&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`
 
 useEffect(() => {
     const fetchData = async () => {
     try {
-    const res = await fetch(searchHandler(name))
+    // const res = await fetch(searchHandler(name))
     const json = await res.json()
     console.log(json) 
     setData(json)
-    console.log(data)
+    // console.log(data)
     } catch (error) {
     console.log(error)        
     }
@@ -33,8 +34,8 @@ useEffect(() => {
         <div onClick={clickHandler} className={styles.wrapper} >  
       <span className={styles.remove}> X </span>  
       <div className={styles.info}>
-        <span> ❤️ </span>
-        <span> btc </span>
+        <img className={styles.image} src={image} alt="Bad" />  
+        <span className={styles.noun}> {nouny} </span>
       </div>
 
         <div className={styles.option}>      

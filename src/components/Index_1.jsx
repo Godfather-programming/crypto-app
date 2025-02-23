@@ -7,13 +7,18 @@ import chartUp from "../assets/chart-up.svg"
 import styles from "./Index_1.module.css"
 import { ImGift } from "react-icons/im";
 import Modal from "./Modal"
+import { RotatingLines } from "react-loader-spinner"
 
 
 
 
-function Index_1({ page, currency }) {
+
+function Index_1({page, currency }) {
   // console.log(currency)
   // console.log(page)
+  
+  const [image, setImage] = useState("")
+  const [nouny, setNouny] = useState("")
   const [datas, setDatas] = useState([])
   const [presence, setPresence ] = useState(false)
   useEffect (() => {
@@ -22,49 +27,46 @@ function Index_1({ page, currency }) {
   }, [page, currency])
   // console.log(datas)
   //   const {image, symbol, name, current_price, price_change_percentage_24h, total_volume} = data
+  
+  const clickHandler = (e) => {
+   const noun = e.target.innerText
+   console.log(noun)
+   if(noun === "BTC") {
+    setNouny("Bitcoin")
+    setImage("https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
+   }
+   setPresence(modal => !modal)
+  }
+  let name = null;
+  const nameHandler = (e) => { 
+    name = e.target.value
+    console.log(name)
+  }
 
   return (
    <>
 
-<Modal presence={presence} setPresence={setPresence} name={datas.map(data => data.name.toLowerCase())}/>
+
    
 
 
 {!datas.length && 
-<div>
-<div className={styles.s1}>
-      <div className={`${styles.s} ${styles.sb} ${styles.sb1} `}></div>
-      <div className={`${styles.s} ${styles.sb} ${styles.sb2} `}></div>
-      <div className={`${styles.s} ${styles.sb} ${styles.sb3} `}></div>
-      <div className={`${styles.s} ${styles.sb} ${styles.sb4} `}></div>
-    </div>
-
-
-    <div className={styles.s2}>
-      <div className={`${styles.s} ${styles.sb} ${styles.sb5} `}></div>
-      <div className={`${styles.s} ${styles.sb} ${styles.sb6} `}></div>
-      <div className={`${styles.s} ${styles.sb} ${styles.sb7} `}></div>
-      <div className={`${styles.s} ${styles.sb} ${styles.sb8} `}></div>
-    </div>
-
-    <div class={styles.bigcon}>
-      <div class={`${styles.big} ${styles.b}`}></div>
-    </div>
-       
-  </div>
+ <RotatingLines strokeColor="red" strokeWidth="3" />
 } 
 
 
 
 {datas.map((data) => (
+
   <>
-  
+<Modal presence={presence} setPresence={setPresence}  data={data} nouny={nouny} image={image}/>
+
       <tr key={data.id} className={styles.space}>
-      <td className={styles.info}> <img className={styles.coin} src={data.image} alt="" /> <span onClick={() => setPresence(modal => !modal)}> {data.symbol} </span> </td>
-      <td> {data.name} </td>
-      <td> ${data.current_price} </td>
-      <td style={{color : data.price_change_percentage_24h > 0 ? "#00E676" : "#FF1744"}}> {data.price_change_percentage_24h}% </td>
-      <td> $ {data.total_volume} </td>
+      <td className={styles.info}> <img className={styles.coin} src={data.image} alt="" /> <span onClick={clickHandler}> {data.symbol} </span> </td>
+      <td onClick={nameHandler}> {data.name} </td>
+      <td> ${data.current_price.toLocaleString()} </td>
+      <td style={{color : data.price_change_percentage_24h > 0 ? "#00E676" : "#FF1744"}}> {data.price_change_percentage_24h.toFixed(2)}% </td>
+      <td> ${data.total_volume.toLocaleString()} </td>
       <td > <img src={data.price_change_percentage_24h > 0 ? chartUp : chartDown} alt="" /> </td>
     </tr>
     </>

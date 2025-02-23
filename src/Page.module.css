@@ -22,6 +22,8 @@
     -o-border-radius: 5px;
     text-align: center;
     margin-right: 10px;
+    color: #fff;
+    cursor: pointer;
 }
 .next {
     display: flex;
@@ -34,4 +36,8 @@
     padding: 5px;
     font-size: 0.8rem;
     box-shadow: 1px 1px 4px 2px #2979FF;
+}
+
+.disabled {
+    opacity: 0.3;
 }

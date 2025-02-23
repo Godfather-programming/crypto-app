@@ -14,20 +14,20 @@ function Page({page, setPage}) {
     }
   return (
     <div className={styles.container}>
-        <button onClick={previousHandler}> previous </button>
-        <span> 1 </span>
-        <span> 2 </span>
+        <button onClick={previousHandler} className={page === 1 ? styles.disabled :null }> previous </button>
+        <span style={{backgroundColor: page === 1 ? "#2979FF" : "inherit"}}> 1 </span>
+        <span style={{backgroundColor: page === 2 ? "#2979FF" : "inherit"}}> 2 </span>
         <span> ... </span>
         {
             page > 2 && page < 9 && 
-            <> <span> {page} </span>
+            <> <span style={{backgroundColor: "#2979FF"}}> {page} </span>
             <span> ... </span> </> 
         }
-        <span> 9 </span>
-        <span> 10 </span>
+        <span style={{backgroundColor: page === 9 ? "#2979FF" : "inherit"}}> 9 </span>
+        <span style={{backgroundColor: page === 10 ? "#2979FF" : "inherit"}}> 10 </span>
 
 
-        <button className={styles.next} onClick={nextHandler}> next </button>
+        <button className={styles.next} onClick={nextHandler} style={{opacity : page === 10 ? "0.6" : "1"}}> next </button>
     </div>
   )
 }

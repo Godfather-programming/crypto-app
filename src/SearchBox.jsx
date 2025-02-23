@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import styles from "./SearchBox.module.css" 
+import { RotatingLines } from "react-loader-spinner"
+
+
 
 function SearchBox({amount, represent}) {
   console.log(amount)
@@ -44,27 +47,7 @@ return () => {
       <div className={styles.container} style={{display : represent ? "block" : "none" }}>
 
       {!datas.length && 
-     <div>
-     <div className={styles.s1}>
-           <div className={`${styles.s} ${styles.sb} ${styles.sb1} `}></div>
-           <div className={`${styles.s} ${styles.sb} ${styles.sb2} `}></div>
-           <div className={`${styles.s} ${styles.sb} ${styles.sb3} `}></div>
-           <div className={`${styles.s} ${styles.sb} ${styles.sb4} `}></div>
-         </div>
-     
-     
-         <div className={styles.s2}>
-           <div className={`${styles.s} ${styles.sb} ${styles.sb5} `}></div>
-           <div className={`${styles.s} ${styles.sb} ${styles.sb6} `}></div>
-           <div className={`${styles.s} ${styles.sb} ${styles.sb7} `}></div>
-           <div className={`${styles.s} ${styles.sb} ${styles.sb8} `}></div>
-         </div>
-     
-         <div class={styles.bigcon}>
-           <div class={`${styles.big} ${styles.b}`}></div>
-         </div>
-            
-       </div> 
+  <RotatingLines strokeColor="red" strokeWidth="3"/> 
      } 
 
 {datas.map(data => (
