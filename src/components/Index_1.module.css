@@ -7,6 +7,12 @@
   flex-direction: column;
 } */
 
+.loader {
+  /* display: grid;
+  align-items: center;
+  justify-content: center; */
+  margin-left: 500px;
+}
 
 .coin {
     width: 25px;
@@ -16,9 +22,10 @@
 .info {
 display: flex;
 align-items: center;
-/* gap: 10px; */
+gap: 10px;
 font-size: 1.2rem;
 text-transform: uppercase;
+cursor: pointer;
 }
 .space {
     height: 80px;

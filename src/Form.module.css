@@ -1,15 +1,15 @@
-.container {
+/* .container {
   display: flex;
   justify-content: center;
   margin: 50px 0 100px;
   min-height: 1000px;
-}
+} */
 
 table {
   margin-top: 70px;  
   width: 100%;
   border-collapse: collapse;
-  /* border-bottom: 2px solid #fff; */
+  border-bottom: 2px solid #fff;
   /* flex-grow: 1;
   flex-basis: 0; */
   text-align: left;
@@ -17,13 +17,13 @@ table {
 
 .thead {
   border-bottom: 2px solid #fff;
-  padding-bottom: 100px;
+  /* padding-bottom: 100px; */
 }
 
-/* th {
-  border-bottom: 2px solid #fff;
-  margin-bottom: 100px;
-} */
+th {
+  /* border-bottom: 2px solid #fff; */
+  /* margin-bottom: 100px; */
+}
 
 .hidden {
     display: none;

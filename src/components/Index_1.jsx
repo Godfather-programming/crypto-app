@@ -13,35 +13,50 @@ import { RotatingLines } from "react-loader-spinner"
 
 
 
-function Index_1({page, currency }) {
+function Index_1({page, currency, symbolCurrency, setSymbolCurrency, presence, setPresence }) {
   // console.log(currency)
   // console.log(page)
-  
-  const [image, setImage] = useState("")
-  const [nouny, setNouny] = useState("")
+  // const [image, setImage] = useState(null)
+  // const [nouny, setNouny] = useState(null)
   const [datas, setDatas] = useState([])
-  const [presence, setPresence ] = useState(false)
   useEffect (() => {
     setDatas([])
-    fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`).then(res => res.json()).then(json => setDatas(json)).catch(err => console.log(err)) 
+try {
+  fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=20&page=${page}&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`).then(res => res.json()).then(json => setDatas(json)).catch(err => console.log(err)) 
+} catch (error) {
+  alert(error)
+}
   }, [page, currency])
   // console.log(datas)
   //   const {image, symbol, name, current_price, price_change_percentage_24h, total_volume} = data
+  // const searchHandler = (information) =>  `https://api.coingecko.com/api/v3/coins/${information}/market_chart?vs_currency=usd&days=7&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`
   
-  const clickHandler = (e) => {
-   const noun = e.target.innerText
-   console.log(noun)
-   if(noun === "BTC") {
-    setNouny("Bitcoin")
-    setImage("https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400")
-   }
-   setPresence(modal => !modal)
+  const clickHandler = async (e) => {
+    console.log(e.target.value)
+    setPresence(true)
+  try {
+    const res = await fetch(searchHandler(id))
+    console.log(id)
+    const json = await res.json()
+    console.log(json)
+  } catch (error) {
+    // setPresence(false)
+    console.log(error)
   }
-  let name = null;
-  const nameHandler = (e) => { 
-    name = e.target.value
-    console.log(name)
   }
+
+
+  // let symbol = null
+  const symbolHandler = () => {
+    if (currency === "usd") {
+     setSymbolCurrency("$")
+    } else if (currency === "eur") {
+     setSymbolCurrency("€")
+    } else {
+      setSymbolCurrency("¥")
+    }
+  }
+  symbolHandler()
 
   return (
    <>
@@ -51,24 +66,14 @@ function Index_1({page, currency }) {
 
 
 {!datas.length && 
- <RotatingLines strokeColor="red" strokeWidth="3" />
+ <div className={styles.loader}>  <RotatingLines strokeColor="red" strokeWidth="3" /> </div>
 } 
 
 
 
 {datas.map((data) => (
-
   <>
-<Modal presence={presence} setPresence={setPresence}  data={data} nouny={nouny} image={image}/>
-
-      <tr key={data.id} className={styles.space}>
-      <td className={styles.info}> <img className={styles.coin} src={data.image} alt="" /> <span onClick={clickHandler}> {data.symbol} </span> </td>
-      <td onClick={nameHandler}> {data.name} </td>
-      <td> ${data.current_price.toLocaleString()} </td>
-      <td style={{color : data.price_change_percentage_24h > 0 ? "#00E676" : "#FF1744"}}> {data.price_change_percentage_24h.toFixed(2)}% </td>
-      <td> ${data.total_volume.toLocaleString()} </td>
-      <td > <img src={data.price_change_percentage_24h > 0 ? chartUp : chartDown} alt="" /> </td>
-    </tr>
+<TableRow data={data} symbolCurrency={symbolCurrency} key={data.id} presence={presence} setPresence={setPresence}/>
     </>
     ))}
 
@@ -79,3 +84,30 @@ function Index_1({page, currency }) {
 }
 
 export default Index_1
+
+
+const TableRow = ({data , symbolCurrency , setPresence}) => {
+  const {image, symbol, name, current_price, total_volume, price_change_percentage_24h: price_change, id} = data
+  const api = (id) => `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`
+  const clickHandler = async () => {
+try {
+  const res = await fetch(api(id))
+  // console.log(id)
+  const json = await res.json()
+  console.log(json)
+  setPresence({...json, data})
+} catch (error) {
+  setPresence(null)
+}
+ }
+  return (
+    <tr key={id} className={styles.space}>
+    <td onClick={clickHandler} className={styles.info}> <img className={styles.coin} src={image} alt="" /> <span> {symbol} </span> </td>
+    <td> {name} </td>
+    <td> {symbolCurrency}{current_price.toLocaleString()} </td>
+    <td style={{color : price_change > 0 ? "#00E676" : "#FF1744"}}> {price_change.toFixed(2)}% </td>
+    <td> {symbolCurrency}{total_volume.toLocaleString()} </td>
+    <td > <img src={price_change > 0 ? chartUp : chartDown} alt="" /> </td>
+  </tr>
+  )
+}

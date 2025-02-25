@@ -1,5 +1,7 @@
-
-.wrapper {
+.container {
+    width: fit-content;
+}
+.wrappers {
     display: flex;
     flex-direction: column;
     width: 65px;
@@ -11,20 +13,20 @@
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-    position: relative;
-    top: -2400px;
-    left: 290px;
+    position: absolute; 
+    top: 200px;
+    left: 460px; 
     text-align: right;
     padding-right: 10px;
     z-index: 3;
 }
-.wrapper span {
+.wrappers span {
     display: flex;
     align-items: center;
     padding: 0px 8px;
     gap: 5px;
 }
-.wrapper span p {
+.wrappers span p {
     width: 20px;
     height: 20px;
 }

@@ -1,53 +1,65 @@
 import { useEffect, useState } from "react"
 import styles from "./Modal.module.css"
-import js from "@eslint/js"
+import convertData from "../helpers/convertData"
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
-function Modal({presence, setPresence, name, data, nouny, image}) {
-  // console.log(data)
-    console.log(name)
+function Modal({presence, setPresence, symbolCurrency }) {
+  console.log(symbolCurrency)
+  // const [data] = presence
+  // const [image, name] = data
+  console.log(presence.data.image)
+const [type, setType] = useState("prices")
+// console.log(convertData(presence, type))
+    // console.log(name)
     // const [modal, setModal] = useState(true)
-    const [information, setData] = useState([])
-    const searchHandler = (information) =>  `https://api.coingecko.com/api/v3/coins/${information}/market_chart?vs_currency=usd&days=7&x_cg_demo_api_key=CG-FchY8pJ4u42ZGfhJHoYuNJDm`
-
-useEffect(() => {
-    const fetchData = async () => {
-    try {
-    // const res = await fetch(searchHandler(name))
-    const json = await res.json()
-    console.log(json) 
-    setData(json)
-    // console.log(data)
-    } catch (error) {
-    console.log(error)        
-    }
-    }
-  fetchData()
-}, [name])
+    // const [information, setData] = useState([])
 
 
-    const clickHandler = (e) => {
-      console.log(e.target)
-      setPresence(presence => !presence)
+// useEffect(() => {
+//     const fetchData = async () => {
+//     try {
+//     // const res = await fetch(searchHandler(name))
+//     const json = await res.json()
+//     console.log(json) 
+//     setData(json)
+//     // console.log(data)
+//     } catch (error) {
+//     console.log(error)        
+//     }
+//     }
+//   fetchData()
+// }, [name])
+// const typeHandler = (eve) => {
+//   // console.log(eve.target.tagName)
+//   if(eve.target.tagName)
+// }
+
+
+    const clickHandler = () => {
+      setPresence(null)
     }
   return (
     <div className={styles.container} style={{display : presence ? "block" : "none"}}>
-        <div onClick={clickHandler} className={styles.wrapper} >  
-      <span className={styles.remove}> X </span>  
+        <div className={styles.wrapper} >  
+      <span onClick={clickHandler} className={styles.remove}> X </span>  
       <div className={styles.info}>
-        <img className={styles.image} src={image} alt="Bad" />  
-        <span className={styles.noun}> {nouny} </span>
+        <img className={styles.image} src={presence.data.image} alt="Bad" />  
+        <span className={styles.noun}> {presence.data.name} </span>
+      </div>
+      <div className={styles.graph}> 
+ <ChartComponent data={convertData(presence, type)} type={type}/>
       </div>
 
-        <div className={styles.option}>      
-        <span> Prices </span>
-        <span> Market Caps </span>
-        <span> Total Volumes </span>
+        <div className={styles.option} onClick={typeHandler}>      
+        <button style={{backgroundColor : type === "prices" ? "#2979FF" : "inherit", color :  type === "prices" ? "#fff" : "inherit"}} > Prices </button>
+        <button style={{backgroundColor : type === "market_caps" ? "#2979FF" : "inherit" , color :  type === "market_caps" ? "#fff" : "inherit"}}> Market Caps </button>
+        <button style={{backgroundColor : type === "total_volumes" ? "#2979FF" : "inherit", color :  type === "total_volumes" ? "#fff" : "inherit"}}> Total Volumes </button>
       </div>
 
       <div className={styles.data}> 
-        <span className={styles.certain}> Price:<span> $35612 </span>   </span>
-        <span className={styles.certain}> ATH: <span> $69405 </span> </span>
-        <span className={styles.certain}> Market Cap: <span> $1234567881000 </span> </span>
+        <span className={styles.certain}> Price:<span> {symbolCurrency}{presence.data.current_price.toLocaleString()} </span>   </span>
+        <span className={styles.certain}> ATH: <span> {symbolCurrency}{presence.data.ath.toLocaleString()} </span> </span>
+        <span className={styles.certain}> Market Cap: <span> {symbolCurrency}{presence.data.market_cap.toLocaleString()} </span> </span>
       </div>
 
       </div>
@@ -57,3 +69,37 @@ useEffect(() => {
 }
 
 export default Modal
+
+const ChartComponent = ({data, type}) => {
+  return (  <ResponsiveContainer width="100%" height="100%"> 
+    <LineChart width={400} height={400} data={data}> 
+      <YAxis dataKey={type} domain={["auto", "auto"]}/>
+      <XAxis dataKey="date" hide/>
+      <Legend />
+    <CartesianGrid color="#404042" />
+    <Tooltip contentStyle={{color : "red"}}/>
+    <Line type="monotone" dataKey={type} stroke="#3874ff" strokeWidth="2px"/>
+    </LineChart>
+  </ResponsiveContainer>  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <button onClick={() => setType("prices")} style={{backgroundColor : type === "prices" ? "#2979FF" : "inherit", color :  type === "prices" ? "#fff" : "inherit"}} > Prices </button> */}

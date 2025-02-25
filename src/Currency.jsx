@@ -2,11 +2,11 @@ import styles from "./Currency.module.css"
 import { GiConfirmed } from "react-icons/gi";
 
 function Currency({setCurrency, show, setShow, currency}) {
-  console.log(show)
+//   console.log(show)
 
   return (
     <div className={styles.container} style={{display : show ? "block" : "none" }}>
-      <div className={styles.wrapper}>
+      <div className={styles.wrappers}>
      <span onClick={() => {
         setCurrency("usd")
         setShow(show => !show)

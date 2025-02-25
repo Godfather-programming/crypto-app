@@ -20,7 +20,7 @@
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
-    height: 600px;
+    height: 580px;
     padding: 30px;
     margin-left: 350px;
     margin-top: 50px;
@@ -41,6 +41,7 @@
     height: 25px;
     font-size: 1.5rem;
     text-align: center;
+    cursor: pointer;
 }
 
 .info {
@@ -60,20 +61,37 @@
     font-size: 1.8rem;
 }
 
+.graph {
+    margin: 30px 15px 30px 0;
+    width: 760px;
+    height: 300px;
+}
+
 .option {
     display: flex;
     align-items: center;
-    margin-top: 410px;
-    margin-left: 50px;
+    /* margin-top: -150px; */
+    /* margin-left: 50px; */
     gap: 80px;
 }
 
-.option span {
+
+.option button {
+    color: #fff;
     box-shadow: inset;
+    margin: 10px 20px;
+    background-color: #18181cdb;
+    border: 1px solid #3874ff;
+    color: #3874ff;
     font-weight: 600;
-    padding: 5px;
-    font-size: 0.8rem;
+    padding: 5px 10px;
+    font-size: 1rem;
     box-shadow: 1px 1px 4px 2px #2979FF;
+    cursor: pointer;
+}
+.ok {
+    color: red;
+    background-color: #38ff3b;
 }
 
 .data {

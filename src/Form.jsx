@@ -18,7 +18,7 @@ function Form({children}) {
     {children}
 </tbody>
     </table>
-    </div>
+     </div>
   )
 }
 

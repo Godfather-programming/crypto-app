@@ -25,7 +25,7 @@ input {
     -ms-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
 }
-input:hover {
+input:focus {
     outline: none;
 }
 
