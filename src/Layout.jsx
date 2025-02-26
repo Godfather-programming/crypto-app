@@ -8,7 +8,7 @@ function Layout({children}) {
 
          <h1 className={styles.headerTitle}> Crypto app </h1>
          <div className={styles.info}> 
-            <span className={styles.mainText}> Godfather </span>
+            <a href="https://botostart.ir" className={styles.mainText}> Godfather </a>
             <span> | React.js Full Course </span>
          </div>
 

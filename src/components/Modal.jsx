@@ -29,10 +29,13 @@ const [type, setType] = useState("prices")
 //     }
 //   fetchData()
 // }, [name])
-// const typeHandler = (eve) => {
-//   // console.log(eve.target.tagName)
-//   if(eve.target.tagName)
-// }
+const typeHandler = (eve) => {
+  // console.log(eve.target.tagName)
+  if(eve.target.tagName === "BUTTON") {
+    const x = eve.target.innerText.toLowerCase().replace(" ", "_")
+    setType(x)
+  }
+}
 
 
     const clickHandler = () => {
